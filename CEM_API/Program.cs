@@ -19,7 +19,8 @@ builder.Services.AddSwaggerGen();
 // Register app db context
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    var env = builder.Environment.IsDevelopment() ? "Local" : "Remote";
+    option.UseSqlServer(builder.Configuration.GetConnectionString("Remote"));
 });
 
 // Register the authentiction handler
